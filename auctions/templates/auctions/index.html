@@ -1,0 +1,77 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if watchlist %}
+        <h2>My Watchlist</h2>
+    {% elif winner %}
+        <h2>My Winnings</h2>
+    {% elif my_listing %}
+        <h2>My Listings</h2>
+    {% elif category %}
+        <h2>{{ category }}</h2>
+    {% else %}
+        <h2>Active Listings</h2>
+    {% endif %}
+ 
+
+    {% if not listings %}
+        {% if watchlist %}
+            <h5 class="alert alert-secondary">Watchlist is empty currently.</h5>
+        {% elif winner %}
+            <h5 class="alert alert-secondary">Currently no winnings.</h5>
+        {% elif my_listing %}
+            <h5 class="alert alert-secondary">You have not listed anything.</h5>
+        {% elif category %}
+            <h5 class="alert alert-secondary">No active listings for {{ category }}.</h5>
+        {% else %}
+            <h5 class="alert alert-secondary">No active listings currently.</h5>
+        {% endif %}
+    {% endif %}
+
+
+    {% for listing in listings %}
+        <div class="listing">
+
+            <div class="listing-left">
+                <a href="{% url 'show_listing' listing.id %}">
+                    <img src="{{ listing.image }}" >
+                </a>
+            </div>
+
+            <div class="listing-right">
+                <a href="{% url 'show_listing' listing.id %}">
+                    <h3>{{ listing.title }}</h3>
+                </a>
+                
+                {% if listing.max_bid %}
+                    <h5>Price: ${{ listing.max_bid }}</h5>
+                {% else %}
+                    <h5>Price: ${{ listing.price }}</h5>
+                {% endif %}
+
+                <p>{{ listing.description }}</p>
+                <p>Listed on:- {{ listing.created_at }}</p>
+                
+                {% if listing.is_active %}
+                    <h6>Status: Active</h6>
+                {% else %}
+                    <h6>Status: Inactive</h6>
+                {% endif %}
+
+                {% if watchlist %}
+                    <form action="{% url 'remove_watchlist' %}" method="post">
+                        {% csrf_token %}
+                        <button value="{{ listing.id }}" name="remove_listing" type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                {% endif %}
+
+                {% if my_listing and listing.is_active %}
+                    <form action="{% url 'close_listing' %}" method="post">
+                        {% csrf_token %}
+                        <button value="{{ listing.id }}" name="close_listing" type="submit" class="btn btn-danger">Close Listing</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

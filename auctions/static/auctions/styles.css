@@ -1,0 +1,40 @@
+body {
+    padding: 10px;
+}
+ 
+p {
+    margin-bottom: 5px;
+}
+
+.listing {
+    display: flex;
+    align-items: center;
+    border: solid;
+    border-width: 1.6px;
+    border-color: rgb(162, 162, 162);
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.listing-left {
+    display: inline-block;
+    width: 200px;
+}
+
+.listing-left a img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 6.4px 0px 0px 6.4px;
+}
+
+.listing-right {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.form-control, .btn  {
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
