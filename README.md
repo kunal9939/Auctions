@@ -4,6 +4,12 @@ A full-stack online auction platform built with Django as part of Harvard's CS50
 
 Commerce allows users to create and manage auction listings, place bids, maintain watchlists, comment on listings, browse items by category, and close auctions with automatic winner selection.
 
+
+## Demo
+
+[▶️ Watch the Project Walkthrough on YouTube](https://www.youtube.com/watch?v=gNdUUs7p1b0)
+
+
 ## Features
 
 - User registration and authentication
